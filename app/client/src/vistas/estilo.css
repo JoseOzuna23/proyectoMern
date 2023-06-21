@@ -1,0 +1,32 @@
+.headeHome{
+    height: 3.4rem;
+    padding: 0.5rem;
+    
+}
+.ContainerPrincipal{
+    background-color: aqua;
+}
+.card{
+    box-shadow: 0 30px 30px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    line-height: 2.5;
+    
+}
+.card:hover {
+    transform: scale(110%); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+  .texto{
+    font-size: 1.3rem;
+  }
+  .textotitulo{
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  .datos{
+    font-weight: normal;
+    color: rgb(122, 120, 120);
+    margin-left: 1rem;
+    
+  }
+  .des{
+    font-size: 1.5rem;
+  }
