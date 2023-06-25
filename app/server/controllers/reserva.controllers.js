@@ -34,11 +34,20 @@ const obtenerDetalleReserva = (req, res)=>{
     })
 
 }
+const eliminarReserva = (req, res)=>{
+    Reserva.deleteOne({_id: req.params.id})
+    .then((resultado)=>{
+        res.json(resultado)
+    }).catch((error)=>{
+        console.log(error)
+    })
+}
 
 module.exports = {
     crearReserva,  
     obtenerReserva,
-    obtenerDetalleReserva
+    obtenerDetalleReserva,
+    eliminarReserva
    
    
 }

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
     const navigate = useNavigate()
+
     const handleLogout = async () => {
         try {
             const response = await fetch('http://localhost:8000/api/user/logout', {
@@ -42,35 +43,29 @@ const Home = () => {
     }
     return (
 
-        <div className='container-fluid bg-light vh-100 pt-3 ContainerPrincipal '>
-            <header className='container bg-info headeHome d-flex justify-content-between '>
+        <div className='container bg-light  pt-3 ContainerPrincipal  '>
+            <header className='container bg-info headeHome d-flex justify-content-between sticky-top m-0 '>
                 <span className='text-white'>
                     LugaresTuristico
                 </span>
                 <span className=''>
-                {getItem() ?
-                    "": <button className='btn  btn-danger bg-secondary me-3 border-0 mx-2'>   <Link to={`/login`} className='d-block  text-decoration-none text-white ' >  Iniciar Sesion </Link></button>
-                }
-                {getItem() ?
-                   "": <button className='btn btn-danger bg-secondary border-0 mx-2'>   <Link to={`/register`} className='d-block text-decoration-none text-white ' >  Registrarse </Link></button>
-                } 
                     {getItem() ?
-                    <button className='btn bg-secondary text-white ' onClick={handleLogout}> Cerrar Sesion</button>: ""
+                        "" : <button className='btn border border-2 bg-info me-3  mx-2'>   <Link to={`/login`} className='d-block  text-decoration-none text-white ' >  Iniciar Sesion </Link></button>
+                    }
+
+                    {getItem() ?
+                        "" : <button className='btn btn-danger bg-secondary border-0 '>   <Link to={`/register`} className='d-block text-decoration-none text-white ' >  Registrarse </Link></button>
+                    }
+                    {getItem() ?
+                        <button className='btn border border-3 bg-info text-white ' ><Link to={`/detallereserva`} className='d-block  text-decoration-none text-white ' >  Lista Reserva </Link></button> : ""
+                    }
+                    {getItem() ?
+                        <button className='btn  text-white mx-3 bg-secondary' onClick={handleLogout}> Cerrar Sesion</button> : ""
                     }
                 </span>
             </header>
             <body className=''>
-                <section>
-                    <div>                     
-
-                        <DetalleTurismo/>
-
-                    </div>
-                    <div>
-
-                    </div>
-
-                </section>
+                
             </body>
 
         </div>

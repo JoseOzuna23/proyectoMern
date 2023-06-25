@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import '../vistas/estilo.css'
 
 
 const InicioSesion = () => {
@@ -19,11 +21,10 @@ const InicioSesion = () => {
     const submitHandler = (e) => {
         e.preventDefault()
 
-        if (correo === "")  {
+        if (correo === "") {
             setErrores({ correo: 'El correo no puede estar vacío' });
             return;
         }
-       
         if (password === "") {
             setErrores({ password: 'La contraseña  no puede estar vacío ' });
             return;
@@ -40,15 +41,26 @@ const InicioSesion = () => {
                 localStorage.setItem('islogued', true);
 
                 // Almacenar los datos del usuario en la variable de estado
-                const accessToken2 =JSON.stringify (res.data.user);
-                localStorage.setItem('usuario',accessToken2 );
-                
+                const accessToken2 = JSON.stringify(res.data.user);
+                localStorage.setItem('usuario', accessToken2);
+                // Obtener el nombre de usuario
+                const nombreUsuario = res.data.user.nombres;
 
-                navigate('/')
+                // Mostrar la alerta SweetAlert2
+                Swal.fire({
+                    title: 'Inicio de sesión exitoso',
+                    text: `¡Bienvenido, ${nombreUsuario}!`,
+                    icon: 'info',
+                    confirmButtonText: 'Aceptar'
+                    
+
+                }).then(() => {
+                    navigate('/'); // Redirige a otra pantalla
+                });
             }).catch((error) => {
                 console.log(error)
                 setErrors(error.response.data.msg);
-                
+
             })
 
     }
@@ -65,9 +77,9 @@ const InicioSesion = () => {
                     <input type="text" className='form-control border-0 imput' onChange={(e) => setCorreo(e.target.value)} />
                     <p> {errors.correo ? <span className='text-danger'> {errors.correo.message}</span> : null}</p>
                     {errores.correo && (<p className="text-danger ">{errores.correo}</p>)}
-                    
+
                     <label htmlFor="" className='form-label mt-3'> Contraseña: </label>
-                    <input type="text" className='form-control border-0' onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" className='form-control border-0' onChange={(e) => setPassword(e.target.value)} />
                     {errores.password && (<p className="text-danger ">{errores.password}</p>)}
                     <span>
                         <button className='btn btn-info mt-4 boton mx-4 text-white'>Ingresar</button>
@@ -75,9 +87,8 @@ const InicioSesion = () => {
 
                     </span>
 
-                    <a href=""> <p className='text-primary h6 mt-5'> ¿Olvidasta la Contraseña?</p></a>
-
-                </form>                  
+                 
+                </form>
 
 
             </div>

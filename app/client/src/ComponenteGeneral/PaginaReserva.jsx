@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2'; // Importa SweetAlert
+import Home from './Home';
 
 // Obtén el valor del token del localStorage se obtiene fuera del componente para que no renderiza
 const obtenerTokenUsuario = () => {
@@ -34,11 +36,24 @@ const PaginaReserva = () => {
     const [usuarioN, setUsuarioN] = useState({})
 
     const [turismo, setTurismo] = useState({})
+    const [errores, setErrores] = useState({})
     const { id } = useParams()
     const navigate = useNavigate()
 
     const submitHander = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+        if (cantidadReserva > (turismo.cantidad)) {
+            // console.log("La cantidad ingresada es mayor a la cantidad disponible");
+
+            Swal.fire({
+                title: 'Error',
+                text: 'La cantidad ingresada es mayor a la cantidad disponible',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+            return;
+        }
+
         axios.post('http://localhost:8000/api/crearreserva', {
             cantidad,
             fecha,
@@ -47,7 +62,16 @@ const PaginaReserva = () => {
             cantidadReserva
         }).then((res) => {
             console.log(res);
-            navigate('/detallereserva')
+
+            Swal.fire({ // Muestra la alerta de SweetAlert
+                title: 'Reserva creada',
+                text: '¡La reserva se ha creado exitosamente!',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+
+            }).then(() => {
+                navigate('/detallereserva'); // Redirige a otra pantalla
+            });
         }).catch((error) => {
             console.log(error)
         })
@@ -65,6 +89,7 @@ const PaginaReserva = () => {
                 setCantidad(res.data.cantidad);
             }).catch((error) => {
                 console.log(error)
+
             })
         // por aqui obtenemos la funcion del guardar token guardamos en la variable y lo renderizamos
         const tokenUsuario = obtenerTokenUsuario();
@@ -75,24 +100,27 @@ const PaginaReserva = () => {
 
     }, [id]);
 
-    const cantidadActual = async (e) => {
+    const cantidadActual = async () => {
         try {
-            const nuevaCantidadTurismo = (turismo.cantidad - cantidadReserva);
+            const nuevaCantidadTurismo = turismo.cantidad - cantidadReserva;
 
-            console.log("este", cantidadReserva)
-
-            await axios.put(`http://localhost:8000/api/actualizarturismo/${id}`, { cantidad: nuevaCantidadTurismo });
-
-            // Actualizar el estado local con la nueva cantidad
-            setTurismo((turismoAnterior) => ({
-                ...turismoAnterior,
+            const response = await axios.put(`http://localhost:8000/api/actualizarturismo/${id}`, {
                 cantidad: nuevaCantidadTurismo
-            }));
+            });
 
+            // Verificar si la respuesta del servidor contiene la cantidad actualizada
+            if (response.data && response.data.cantidad) {
+                // Actualizar el estado local con la nueva cantidad
+                setTurismo((turismoAnterior) => ({
+                    ...turismoAnterior,
+                    cantidad: response.data.cantidad
+                }));
+            }
         } catch (error) {
             console.log(error);
         }
     };
+
 
 
     const currentDate = new Date().toISOString().split('T')[0];
@@ -101,6 +129,8 @@ const PaginaReserva = () => {
     }, []);
 
     return (
+        <>
+        <Home/>
         <div className='col-6 mx-auto'>
             <form onSubmit={submitHander}>
                 <label htmlFor="" className='form-label' >Nombre</label>
@@ -117,15 +147,19 @@ const PaginaReserva = () => {
 
                 <label htmlFor="" className='form-label' > Ingrese la cantidad de lugares</label>
                 <input type="number" className='form-control' value={cantidadReserva} onChange={(e) => setCantidadReserva(e.target.value)} />
+
+
                 <span className='d-flex justify-content-center mx-3'>
-                <button className='btn btn-danger mt-3' onClick={cantidadActual}> Crear</button>
-                <button className='btn btn-info mt-4 boton'> <Link to={`/`} className='d-block  text-decoration-none text-white ' > Cancelar </Link></button>
+                    <button className='btn btn-danger mt-3' onClick={cantidadActual}> Crear</button>
+                    <button className='btn btn-info mt-4 boton'> <Link to={`/`} className='d-block  text-decoration-none text-white ' > Cancelar </Link></button>
 
                 </span>
-                
+
             </form>
 
         </div>
+
+        </>
     )
 }
 

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import '../vistas/estilo.css'
+import Home from './Home'
 
 
 const Reserva = () => {
@@ -76,14 +77,15 @@ const Reserva = () => {
         return formattedDate;
     };
     return (
+        <>
+        <Home/>
         <div className='row p-5  '>
             <div className='border col-10 border-3 p-5 mx-auto'>
                 <span className='d-flex justify-content-between '>
-                    <button className='btn btn-info texto'> <Link to={`/`} className='d-block me text-white'> </Link> <i class="fa fa-mail-reply" ></i> </button>
+                <button className='btn border border-3  border-info text-info bg-white mt-4 boton'> <Link to={`/`} className='d-block  text-decoration-none  ' > Pagina Principal </Link></button>
                     <span className=''>
-                    <button className='btn btn-info texto mx-5 p-2' onClick={handleLogout}> Cerrar Sesion</button>
-                    {getItem() ?
-                    <button id='boton-autenticado ' className='btn btn-info texto '>  <Link to={`/detalle/${turismo._id}`} className='d-block me text-white'> Reservar </Link> </button>: ""
+                     {getItem() ?
+                    <button id='boton-autenticado ' className='btn btn-info mt-4 boton '>  <Link to={`/detalle/${turismo._id}`} className='d-block me text-white'> Reservar </Link> </button>: ""
                     }
                     </span>
                     
@@ -112,6 +114,7 @@ const Reserva = () => {
 
 
         </div>
+        </>
     )
 }
 

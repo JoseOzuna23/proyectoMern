@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import '../vistas/estilo.css'
+import Home from './Home'
 
 
 const DetalleTurismo = () => {
@@ -45,11 +46,12 @@ const DetalleTurismo = () => {
     }, []);
 
     return (
-
+        
         <>
-
+        <Home/>
+       
             <div class="row p-5  mx-auto  ">
-
+            
                 {
                     lista.map((turismo) => (
                         <div className="col-md-6 p-5" key={turismo.id}>
@@ -73,7 +75,6 @@ const DetalleTurismo = () => {
                                     {getItem() ?
                                         <button id='boton-autenticado ' className='btn btn-info texto '>  <Link to={`/detalle/${turismo._id}`} className='d-block me text-white'> Reservar </Link> </button> : ""
                                     }
-
                                     </span>
                                     
                                     

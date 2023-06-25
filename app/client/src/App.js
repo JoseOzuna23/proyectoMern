@@ -10,13 +10,14 @@ import Home from './ComponenteGeneral/Home';
 import Reserva from './ComponenteGeneral/Reserva';
 import PaginaReserva from './ComponenteGeneral/PaginaReserva';
 import DetallesReserva from './ComponenteGeneral/DetallesReserva';
+import DetalleTurismo from './ComponenteGeneral/DetalleTurismo';
 
 function App() {
   return (
     <div className="App ">
      <BrowserRouter>
         <Routes >
-          <Route path='/' element={<Home/>} />
+          <Route path='/' element={<DetalleTurismo/>} />
           <Route path='/crear' element={<CrearTurismo/>} />          
           <Route path='/register' element={<Registro/>} /> 
           <Route path='/login' element={<InicioSesion/>} />        
