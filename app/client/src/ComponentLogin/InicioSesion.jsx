@@ -50,7 +50,7 @@ const InicioSesion = () => {
                 Swal.fire({
                     title: 'Inicio de sesión exitoso',
                     text: `¡Bienvenido, ${nombreUsuario}!`,
-                    icon: 'info',
+                    icon: 'success',
                     confirmButtonText: 'Aceptar'
                     
 

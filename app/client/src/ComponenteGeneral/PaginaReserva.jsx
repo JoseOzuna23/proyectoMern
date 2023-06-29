@@ -37,6 +37,8 @@ const PaginaReserva = () => {
 
     const [turismo, setTurismo] = useState({})
     const [errores, setErrores] = useState({})
+
+    
     const { id } = useParams()
     const navigate = useNavigate()
 
@@ -54,6 +56,10 @@ const PaginaReserva = () => {
             return;
         }
 
+        if (cantidadReserva === "") {
+            setErrores({ cantidadReserva: 'La cantidad de reserva  no puede estar vacío ' });
+            return;
+        }
         axios.post('http://localhost:8000/api/crearreserva', {
             cantidad,
             fecha,
@@ -131,9 +137,9 @@ const PaginaReserva = () => {
     return (
         <>
         <Home/>
-        <div className='col-6 mx-auto'>
+        <div className='col-4 mx-auto'>
             <form onSubmit={submitHander}>
-                <label htmlFor="" className='form-label' >Nombre</label>
+                <label htmlFor="" className='form-label ' >Nombre</label>
                 <input type="text" className='form-control' value={turismo.nombre ? turismo.nombre : ''} onChange={(e) => setNombre(e.target.value)} readOnly />
 
                 <label htmlFor="" className='form-label' >Usuario</label>
@@ -145,12 +151,12 @@ const PaginaReserva = () => {
                 <label htmlFor="" className='form-label' >Cantidad Disponible</label>
                 <input type="number" className='form-control' value={turismo.cantidad} onChange={(e) => setCantidad(e.target.value)} readOnly />
 
-                <label htmlFor="" className='form-label' > Ingrese la cantidad de lugares</label>
-                <input type="number" className='form-control' value={cantidadReserva} onChange={(e) => setCantidadReserva(e.target.value)} />
+                <label htmlFor="" className='form-label ' > Ingrese la cantidad de lugares</label>
+                <input type="number" className='form-control cortar' value={cantidadReserva} onChange={(e) => setCantidadReserva(e.target.value)} />
+                {errores.cantidadReserva && (<p className="text-danger ">{errores.cantidadReserva}</p>)}
 
-
-                <span className='d-flex justify-content-center mx-3'>
-                    <button className='btn btn-danger mt-3' onClick={cantidadActual}> Crear</button>
+                <span className='d-flex justify-content-center'>
+                    <button className='btn btn-danger mt-4 me-5' onClick={cantidadActual}> Crear</button>
                     <button className='btn btn-info mt-4 boton'> <Link to={`/`} className='d-block  text-decoration-none text-white ' > Cancelar </Link></button>
 
                 </span>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 const Registro = () => {
@@ -58,9 +59,18 @@ const Registro = () => {
         axios.post('http://localhost:8000/api/user/register', {
             nombres, apellidos, direccion, telefono, correo, password, confirmPassword,
         },{withCredentials:true})
-            .then((res) => {
+            .then((res) => {                
                 console.log(res)
-                navigate('/login')
+                Swal.fire({
+                    title: 'Se ha registrado exitosamente',                    
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                    
+
+                }).then(() => {
+                    navigate('/'); // Redirige a otra pantalla
+                });
+                
             }).catch((error) => {
                 console.log(error)
             })

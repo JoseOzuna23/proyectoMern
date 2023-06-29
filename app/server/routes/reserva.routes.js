@@ -8,6 +8,6 @@ module.exports = (app) =>{
     app.get('/api/mostrarreserva', authenticate, ControladorReserva.obtenerReserva)
     app.get('/api/obtenerreserva', ControladorReserva.obtenerDetalleReserva)
     app.delete('/api/eliminarreserva/:id', ControladorReserva.eliminarReserva)
-   
+       
      
 }

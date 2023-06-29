@@ -6,11 +6,14 @@ import { Link } from 'react-router-dom';
 import Home from './Home';
 
 
+
 const DetallesReserva = () => {
     const [listareserva, setListareserva] = useState([]);
     const [usuarioN, setUsuarioN] = useState('');
     const { id } = useParams()
     const [loading, setLoading] = useState(true);
+
+
 
     const obtenerTokenUsuario = () => {
         const token = localStorage.getItem('usuario');
@@ -36,7 +39,6 @@ const DetallesReserva = () => {
     };
 
     const eliminarReserva = (_id) => {
-        
         Swal.fire({
             title: '¿Estás seguro/a?',
             text: '¿Quieres eliminar?',
@@ -59,6 +61,18 @@ const DetallesReserva = () => {
                                 (reserva) => reserva._id !== _id
                             );
                             setListareserva(nuevaListaReserva);
+                            // Update the quantity in the database
+                            const reservaEliminada = listareserva.find((reserva) => reserva._id === _id);
+                            const nuevaCantidad = reservaEliminada.cantidadReserva + reservaEliminada.cantidad;
+                           
+                            axios
+                                .put(`http://localhost:8000/api/actualizarturismoreserva/${_id}`, { cantidad: nuevaCantidad })
+                                .then((res) => {
+                                    console.log('Cantidad actualizada en la base de datos:', res.data);
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                });
                         });
                     })
                     .catch((error) => {
@@ -97,7 +111,7 @@ const DetallesReserva = () => {
 
     return (
         <>
-        <Home/>
+            <Home />
             <button className='btn border border-3 text-info bg-white mt-4 boton border-info'> <Link to={`/`} className='d-block  text-decoration-none  ' > Pagina Principal </Link></button>
             <div class="row p-4 mx-auto  ">
                 {
@@ -126,6 +140,8 @@ const DetallesReserva = () => {
 
                 }
             </div>
+
+
 
         </>
 

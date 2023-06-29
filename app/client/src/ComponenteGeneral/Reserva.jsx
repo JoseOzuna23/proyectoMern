@@ -23,9 +23,10 @@ const Reserva = () => {
             return false;
         }
     }
-    
+
 
     useEffect(() => {
+
 
         axios.get(`http://localhost:8000/api/detalleuno/${id}`, { withCredentials: true })
 
@@ -62,7 +63,7 @@ const Reserva = () => {
             console.log(error);
         }
     };
-    
+
 
     // Función para formatear la fecha
     const formatFecha = (fecha) => {
@@ -78,42 +79,44 @@ const Reserva = () => {
     };
     return (
         <>
-        <Home/>
-        <div className='row p-5  '>
-            <div className='border col-10 border-3 p-5 mx-auto'>
-                <span className='d-flex justify-content-between '>
-                <button className='btn border border-3  border-info text-info bg-white mt-4 boton'> <Link to={`/`} className='d-block  text-decoration-none  ' > Pagina Principal </Link></button>
-                    <span className=''>
-                     {getItem() ?
-                    <button id='boton-autenticado ' className='btn btn-info mt-4 boton '>  <Link to={`/detalle/${turismo._id}`} className='d-block me text-white'> Reservar </Link> </button>: ""
-                    }
+            <Home />
+            <div className='row p-5  '>
+                <div className='border col-10 border-3 p-2 mx-auto'>
+                    <span className=' '>
+                        <button className='btn border border-3  border-info text-info bg-white mt-4 boton'> <Link to={`/`} className='d-block  text-decoration-none  ' > Pagina Principal </Link></button>
+
                     </span>
-                    
-                </span>
-                <h3 className='mt-3'><span className='fw-bold' > Nombre del lugar: </span>{turismo.nombre}</h3>
-                <span>
-                    <img className='mt-3' src={turismo.fotos} alt="Logotipo de la empresa XYZ" />
-                </span>
-                <h1 className='mt-3'> Descripcion: </h1> <p className='mt-3 p-3 des'>{turismo.descripcion}</p>
-                <span className='d-flex textotitulo'>
-                    <p className='card-title '>Fecha Disponible:  </p> <p className='datos'>{formatFecha(turismo.fecha)}</p>
-                </span>
-                <span className='d-flex textotitulo' >
-                    <p className='card-text '> Direccion: </p> <p className='datos'> {turismo.direccion}</p>
-                </span>
-                <span className='d-flex textotitulo' >
-                    <p className='card-text '> Correo Electronico: </p> <p className='datos'> {turismo.correo}</p>
-                </span>
-                <span className='d-flex textotitulo' >
-                    <p className='card-text '> Numero par contacto: </p> <p className='datos'> {turismo.telefono}</p>
-                </span>
-                <span className='d-flex textotitulo' >
-                    <p className='card-text '> Cantidad Disponible para reservar: </p> <p className='datos'> {turismo.cantidad}</p>
-                </span>
+                    <h3 className='mt-3'><span className='fw-bold' > Nombre del lugar: </span>{turismo.nombre}</h3>
+                    <span>
+                        <img className='mt-3' src={turismo.fotos} alt="Logotipo de la empresa XYZ" />
+                    </span>
+                    <h1 className='mt-3'> Descripcion: </h1> <p className='mt-3 p-3 des'>{turismo.descripcion}</p>
+                    <span className='d-flex textotitulo'>
+                        <p className='card-title '>Fecha Disponible:  </p> <p className='datos'>{formatFecha(turismo.fecha)}</p>
+                    </span>
+                    <span className='d-flex textotitulo' >
+                        <p className='card-text '> Direccion: </p> <p className='datos'> {turismo.direccion}</p>
+                    </span>
+                    <span className='d-flex textotitulo' >
+                        <p className='card-text '> Correo Electronico: </p> <p className='datos'> {turismo.correo}</p>
+                    </span>
+                    <span className='d-flex textotitulo' >
+                        <p className='card-text '> Numero par contacto: </p> <p className='datos'> {turismo.telefono}</p>
+                    </span>
+                    <span className='d-flex textotitulo' >
+                        <p className='card-text '> Cantidad Disponible para reservar: </p> <p className='datos'> {turismo.cantidad}</p>
+                    </span>
+
+                    <span className=''>
+                        {getItem() ?
+                            <button id='boton-autenticado ' className='btn btn-info mt-4 boton '>  <Link to={`/detalle/${turismo._id}`} className='d-block me text-white'> Reservar </Link> </button> : ""
+                        }
+                    </span>
+                </div>
+
+
+
             </div>
-
-
-        </div>
         </>
     )
 }

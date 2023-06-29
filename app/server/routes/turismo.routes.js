@@ -8,6 +8,8 @@ module.exports = (app) =>{
     app.get('/api/detalleuno/:id',  ControladorTurismo.obtenerDetalleTurismo)
     app.get('/api/detalle/:id',  authenticate, ControladorTurismo.obtenerDetalleTurismo)
     app.put('/api/actualizarturismo/:id',  ControladorTurismo.actualizar)
+    app.put('/api/actualizarturismoreserva/:id',  ControladorTurismo.editarReserva)
+
    
     
     

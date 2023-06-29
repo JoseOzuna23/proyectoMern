@@ -21,6 +21,7 @@ const Home = () => {
                 localStorage.removeItem("islogued");
                 localStorage.removeItem("usuario");
                 navigate('/')
+                window.location.reload();
 
             } else {
                 // Error al cerrar sesión

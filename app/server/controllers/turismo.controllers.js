@@ -47,13 +47,34 @@ const actualizar = async (req, res) => {
         res.status(500).json({ success: false, message: 'Error al actualizar la cantidad de turismo.' });
     }
 };
+const editarReserva = (req, res) => {
+    const { id } = req.params;
+    const { cantidad } = req.body;
+    console.log('ID de reserva:', id);
+
+    console.log('Cantidad recibida:', cantidad);
+
+    Turismo.findOneAndUpdate(
+        { _id: id },
+        { cantidad: cantidad }, // Asegúrate de pasar el valor correcto de cantidad
+        { new: true },
+    )
+        .then((reservaActualizada) => {
+            res.json(reservaActualizada);
+        })
+        .catch((error) => {
+            console.log(error);
+            res.status(400).json(error);
+        });
+};
 
 
 module.exports = {
     obtenerTurismo,
     crearTurismo,
     obtenerDetalleTurismo,
-    actualizar
+    actualizar,
+    editarReserva
 
 
 }

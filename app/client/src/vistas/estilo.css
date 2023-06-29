@@ -1,35 +1,79 @@
-.headeHome{
-    height: 3.4rem;
-    padding: 0.5rem;
-    
+.headeHome {
+  height: 3.4rem;
+  padding: 0.5rem;
+
 }
-.ContainerPrincipal{
-    background-color: aqua;
+
+.ContainerPrincipal {
+  background-color: aqua;
 }
-.card{
-    box-shadow: 0 30px 30px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    line-height: 2.5;
-    
+
+.card {
+  box-shadow: 0 30px 30px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  line-height: 2.5;
+
 }
+
 .card:hover {
-    transform: scale(110%); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
-  }
-  .texto{
-    font-size: 1.3rem;
-  }
-  .textotitulo{
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  .datos{
-    font-weight: normal;
-    color: rgb(122, 120, 120);
-    margin-left: 1rem;
-    
-  }
-  .des{
-    font-size: 1.5rem;
-  }
-  .alerta{
-    background: rgb(37, 202, 243);
-  }
+  transform: scale(110%);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.texto {
+  font-size: 1.3rem;
+}
+
+.textotitulo {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.datos {
+  font-weight: normal;
+  color: rgb(122, 120, 120);
+  margin-left: 1rem;
+
+}
+
+.des {
+  font-size: 1.5rem;
+}
+
+.alerta {
+  background: rgb(37, 202, 243);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  background-color: aqua;
+  padding: 1rem;
+  width: 80%;
+  font-size: 180%;
+  margin-left: 10%;
+}
+
+.pagination li {
+  display: inline-block;
+  margin: 0 5px;
+ 
+}
+
+.pagination a {
+  color: #faf5f5;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+
+}
+.page-link{
+  background-color: rgba(0, 0, 0, 0.19)
+  
+}
+
+.pagination .active {
+  background: #09b7e2;
+  color: #fff;
+}
+
